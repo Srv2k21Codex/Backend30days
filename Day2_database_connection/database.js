@@ -1,21 +1,22 @@
-
 const URI = "mongodb+srv://srvy5748_db_user:gXanIn0IwxaoscOz@namastedev.yro4lbj.mongodb.net/?appName=namasteDev"
 
 const {MongoClient} = require('mongodb')
 
 const client = new MongoClient(URI);
 
-const dbName = "DEMO"
+const dbName = 'DEMO';
 
-async function dbConnect(){
-
-    await client.connect();
-    console.log("database successfully connected");
-    const db = client.db(dbName);
+async function dbConnection(){
+    await client.connect()
+    console.log("database connected successfully")
+    const db = client.db(dbName) //return references of db and db is object
     const collection = db.collection('Users')
-    return collection ;
+    const findDetails = await collection.find({}).toArray();
+    console.log("details are",findDetails)
+ 
+    return "done";
 }
-dbConnect()
 
-
-module.exports={dbConnect,client};
+dbConnection()
+.then(console.log)
+.finally(()=>client.close());
