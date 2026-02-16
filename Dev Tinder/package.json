@@ -1,0 +1,21 @@
+{
+  "name": "dev-tinder",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "Nodejs",
+    "Javascript"
+  ],
+  "license": "ISC",
+  "author": "Saurav Agarwal",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongoose": "^9.2.1"
+  }
+}
