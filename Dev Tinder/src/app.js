@@ -3,8 +3,31 @@ const connectDb = require('./config/database')
 const app = express();
 require('./config/database')
 const Users = require('./models/users')
-app.use(express.json());
-
+const getUsers = require('./utils/GetUser') 
+const {getFeed} = require('./utils/GetFeed')
+const {signup} = require('./utils/SignUp')
+const findbyid = require('./utils/FindById')
+app.use(express.json())
+app.get('/getFeed',getFeed)
+app.get('/users',getUsers)
+app.post('/signUp',signup)
+app.get('/findbyid',findbyid)
+ /*app.post('/signUp',async (req,res)=>{
+  // const users = new Users({
+  //   firstName:"saurav",
+  //   lastName:"kumar",
+  //   email:"vinayaksaurav284@gmail.com",
+  //   age:12,
+  //   gender:"male
+  // })
+    const users = new Users(req.body)
+    try{
+      await users.save()
+      res.send("data saved successfully...")
+    }catch(err){
+      res.send("data failed to save...")
+    }
+})*/
 connectDb().then(()=>{
   console.log("database connected successfully...")
   app.listen(3000,()=>{
@@ -15,23 +38,6 @@ connectDb().then(()=>{
   console.log("database connection not established....")
 })
 
-app.post('/signUp',async (req,res)=>{
-  // const users = new Users({
-  //   firstName:"saurav",
-  //   lastName:"kumar",
-  //   email:"vinayaksaurav284@gmail.com",
-  //   age:12,
-  //   gender:"male"
-  // })
-    const users = new Users(req.body)
-    try{
-      await users.save()
-      res.send("data saved successfully...")
-    }catch{
-      res.send("data failed to save...")
-    }
-})
- 
 
 // const {adminAuth} = require('./utils/auth')
 
